@@ -1,0 +1,24 @@
+apiVersion: vmoperator.vmware.com/v1alpha3
+kind: VirtualMachine
+metadata:
+  name: oc-mysql
+  labels:
+    vm-selector: oc-mysql
+    vm-lb-het1: vm-lb-selector
+    topology.kubernetes.io/zone: z-wld-a
+spec:
+  className: best-effort-small
+  # Friendly image name: noble-server-cloudimg-amd64
+  imageName: vmi-b96185a2d1efe5555
+  storageClass: cluster-wld01-01a-storage-policy
+  powerState: PoweredOn
+  network:
+    hostName: oc-mysql
+    domainName: vcf.lab
+    nameservers:
+      - 8.8.8.8
+  bootstrap:
+    cloudInit:
+      rawCloudConfig:
+        name: oc-mysql-bootstrap-secret
+        key: user-data

@@ -1,0 +1,187 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/instance: my-open-cart
+    app.kubernetes.io/name: opencart
+  name: open-cart-pvc
+  namespace: opencart
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 8Gi
+  storageClassName: cluster-wld01-01a-storage-policy
+
+---
+apiVersion: v1
+data:
+  opencart-password: Vk13YXJlMSE=
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/instance: my-open-cart
+    app.kubernetes.io/name: opencart
+  name: open-cart-oc-password
+  namespace: opencart
+type: Opaque
+
+
+---
+apiVersion: v1
+data:
+  mariadb-password: Vk13YXJlMSE=
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/instance: my-open-cart
+    app.kubernetes.io/name: opencart
+  name: my-open-externaldb
+  namespace: opencart
+type: Opaque
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: my-open-cart
+    app.kubernetes.io/name: opencart
+  name: my-open-cart-app
+  namespace: opencart
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: my-open-cart
+      app.kubernetes.io/name: opencart
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: my-open-cart
+        app.kubernetes.io/name: opencart
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: my-open-cart
+                    app.kubernetes.io/name: opencart
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      containers:
+        - env:
+            - name: BITNAMI_DEBUG
+              value: 'false'
+            - name: ALLOW_EMPTY_PASSWORD
+              value: to_string(yes)
+            - name: APACHE_HTTP_PORT_NUMBER
+              value: '8080'
+            - name: APACHE_HTTPS_PORT_NUMBER
+              value: '8443'
+            - name: OPENCART_DATABASE_HOST
+              value: '10.1.11.5'
+            - name: OPENCART_DATABASE_PORT_NUMBER
+              value: '3306'
+            - name: OPENCART_DATABASE_NAME
+              value: opencart
+            - name: OPENCART_DATABASE_USER
+              value: ocuser
+            - name: OPENCART_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: mariadb-password
+                  name: my-open-externaldb
+            - name: OPENCART_SKIP_BOOTSTRAP
+              value: to_string(no)
+            - name: OPENCART_HOST
+              value: '10.1.11.7'
+            - name: OPENCART_USERNAME
+              value: user
+            - name: OPENCART_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: opencart-password
+                  name: open-cart-oc-password
+            - name: OPENCART_EMAIL
+              value: user@example.com
+          image: harbor-01a.site-a.vcf.lab/opencart/opencart:4.0.1-1-debian-11-r66
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              httpHeaders:
+                - name: Host
+                  value: '10.1.11.7'
+              path: /administration/
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          name: my-open-cart-app
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 8443
+              name: https
+              protocol: TCP
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              httpHeaders:
+                - name: Host
+                  value: '10.1.11.7'
+              path: /administration/
+              port: http
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /bitnami/opencart
+              name: opencart-data
+              subPath: opencart
+            - mountPath: /bitnami/opencart_storage
+              name: opencart-data
+              subPath: opencart_storage
+      dnsPolicy: ClusterFirst
+      hostAliases:
+        - hostnames:
+            - status.localhost
+          ip: 127.0.0.1
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1001
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: opencart-data
+          persistentVolumeClaim:
+            claimName: open-cart-pvc
