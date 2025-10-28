@@ -9,8 +9,8 @@ metadata:
 spec:
   className: best-effort-small
   # Friendly image name: noble-server-cloudimg-amd64
-  imageName: vmi-b96185a2d1efe5555
-  storageClass: cluster-wld01-01a-storage-policy
+  imageName: vmi-1c67b2050f6f7f9e0
+  storageClass: vsan-default-storage-policy
   powerState: PoweredOn
   network:
     hostName: oc-mysql
