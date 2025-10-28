@@ -20,4 +20,4 @@ spec:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   type: LoadBalancer
-  loadBalancerIP: "10.100.0.100"
+#loadBalancerIP: "10.100.0.100"
