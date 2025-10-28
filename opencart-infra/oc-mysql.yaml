@@ -5,7 +5,7 @@ metadata:
   labels:
     vm-selector: oc-mysql
     vm-lb-het1: vm-lb-selector
-    topology.kubernetes.io/zone: z-wld-a
+    topology.kubernetes.io/zone: domain-c10
 spec:
   className: best-effort-small
   # Friendly image name: noble-server-cloudimg-amd64
