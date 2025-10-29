@@ -119,7 +119,7 @@ spec:
                   name: open-cart-oc-password
             - name: OPENCART_EMAIL
               value: user@example.com
-          image: harbor-01a.site-a.vcf.lab/opencart/opencart:4.0.1-1-debian-11-r66
+          image: harbor.mbentley.net/docker.io/bitnamilegacy/opencart-archived:4.0.1-1-debian-11-r66
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 6
