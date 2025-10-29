@@ -12,7 +12,7 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  storageClassName: cluster-wld01-01a-storage-policy
+  storageClassName: vsan-default-storage-policy
 
 ---
 apiVersion: v1
