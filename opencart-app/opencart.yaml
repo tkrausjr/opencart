@@ -86,7 +86,7 @@ spec:
       containers:
         - env:
             - name: BITNAMI_DEBUG
-              value: 'false'
+              value: 'true'
             - name: ALLOW_EMPTY_PASSWORD
               value: to_string(yes)
             - name: APACHE_HTTP_PORT_NUMBER
