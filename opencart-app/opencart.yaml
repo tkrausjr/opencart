@@ -86,7 +86,7 @@ spec:
       containers:
         - env:
             - name: BITNAMI_DEBUG
-              value: 'true'
+              value: 'false'
             - name: ALLOW_EMPTY_PASSWORD
               value: to_string(yes)
             - name: APACHE_HTTP_PORT_NUMBER
@@ -94,7 +94,7 @@ spec:
             - name: APACHE_HTTPS_PORT_NUMBER
               value: '8443'
             - name: OPENCART_DATABASE_HOST
-              value: '10.100.0.2'
+              value: '10.1.8.10'
             - name: OPENCART_DATABASE_PORT_NUMBER
               value: '3306'
             - name: OPENCART_DATABASE_NAME
