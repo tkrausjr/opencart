@@ -1,7 +1,7 @@
 apiVersion: vmoperator.vmware.com/v1alpha3
 kind: VirtualMachineService
 metadata:
-  name: vm-lb-het1
+  name: oc-mysql-lb
 spec:
   selector:
     vm-lb-het1: vm-lb-selector
