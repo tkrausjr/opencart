@@ -109,7 +109,7 @@ spec:
             - name: OPENCART_SKIP_BOOTSTRAP
               value: to_string(no)
             - name: OPENCART_HOST
-              value: '10.1.8.10'
+              value: '10.1.8.100'
             - name: OPENCART_USERNAME
               value: user
             - name: OPENCART_PASSWORD
@@ -126,7 +126,7 @@ spec:
             httpGet:
               httpHeaders:
                 - name: Host
-                  value: '10.1.8.10'
+                  value: '10.1.8.100'
               path: /administration/
               port: http
               scheme: HTTP
@@ -147,7 +147,7 @@ spec:
             httpGet:
               httpHeaders:
                 - name: Host
-                  value: '10.1.8.10'
+                  value: '10.1.8.100'
               path: /administration/
               port: http
               scheme: HTTP
