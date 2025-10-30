@@ -7,7 +7,7 @@ metadata:
     vm-lb-het1: vm-lb-selector
     topology.kubernetes.io/zone: domain-c10
 spec:
-  className: best-effort-small
+  className: best-effort-medium
   # Friendly image name: noble-server-cloudimg-amd64
   imageName: vmi-1c67b2050f6f7f9e0
   storageClass: vsan-default-storage-policy
