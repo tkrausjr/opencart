@@ -4,10 +4,10 @@ metadata:
   name: oc-mysql
   labels:
     vm-selector: oc-mysql
-    vm-lb-selector: oc-mysql
+    vm-lb-het1: vm-lb-selector
     topology.kubernetes.io/zone: z-wld-a
 spec:
-  className: best-effort-small
+  className: best-effort-medium
   # Friendly image name: noble-server-cloudimg-amd64
   imageName: vmi-f0e634cb6faede95e
   storageClass: vsan-default-storage-policy
@@ -16,7 +16,7 @@ spec:
     hostName: oc-mysql
     domainName: vcf.lab
     nameservers:
-      - 10.1.1.1
+      - 8.8.8.8
   bootstrap:
     cloudInit:
       rawCloudConfig:

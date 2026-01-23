@@ -1,0 +1,18 @@
+apiVersion: vmoperator.vmware.com/v1alpha3
+kind: VirtualMachineService
+metadata:
+  name: oc-mysql-service
+spec:
+  selector:
+    vm-lb-selector: oc-mysql
+  type: LoadBalancer
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+  loadBalancerIP: "10.1.11.110"
