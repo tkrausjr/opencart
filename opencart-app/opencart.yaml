@@ -83,7 +83,7 @@ spec:
                     app.kubernetes.io/name: opencart
                 topologyKey: kubernetes.io/hostname
               weight: 1
-      containers:
+k      containers:
         - env:
             - name: BITNAMI_DEBUG
               value: 'true'
