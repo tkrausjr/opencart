@@ -2,7 +2,6 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   name: vks-01-argocd
-  namespace: demo-org-ns1-7d7gl
 spec:
   topology:
     class: builtin-generic-v3.6.0
