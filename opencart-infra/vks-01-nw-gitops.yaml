@@ -1,17 +1,9 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: vks-01-gitops
-  namespace: test-projectb-zvm4s
+  name: vks-01-argocd
+  namespace: demo-org-ns1-7d7gl
 spec:
-  clusterNetwork:
-    pods:
-      cidrBlocks:
-        - 192.168.156.0/20
-    services:
-      cidrBlocks:
-        - 10.96.0.0/12
-    serviceDomain: cluster.local
   topology:
     class: builtin-generic-v3.6.0
     classNamespace: vmware-system-vks-public
@@ -25,7 +17,7 @@ spec:
       - name: vmClass
         value: best-effort-small
       - name: storageClass
-        value: vsan-default-storage-policy
+        value: nfs-datastore-policy
     controlPlane:
       replicas: 1
       metadata:
@@ -34,14 +26,12 @@ spec:
     workers:
       machineDeployments:
         - class: node-pool
-          name: vks-01-gitops-np-s2ih
+          name: kubernetes-cluster-4z28-np-qitf
           replicas: 1
           metadata:
             annotations:
               run.tanzu.vmware.com/resolve-os-image: os-name=photon, content-library=cl-03a37b547e2e41e3e
           variables:
             overrides:
-              - name: node
-                value:
-                  labels:
-                    provisioned-by: argocd
+              - name: storageClass
+                value: vsan-default-storage-policy
