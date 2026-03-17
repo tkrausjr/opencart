@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: vks-01-gitops
+  name: vks-02-gitops
 spec:
   clusterNetwork:
     pods:
@@ -14,7 +14,7 @@ spec:
   topology:
     class: builtin-generic-v3.6.0
     classNamespace: vmware-system-vks-public
-    version: v1.35.0---vmware.2-vkr.4
+    version: v1.34.2---vmware.2-vkr.2
     variables:
       - name: kubernetes
         value:
@@ -22,7 +22,7 @@ spec:
             enabled: true
             renewalDaysBeforeExpiry: 90
       - name: vmClass
-        value: best-effort-small
+        value: best-effort-xsmall
       - name: storageClass
         value: vsan-default-storage-policy
     controlPlane:
