@@ -9,7 +9,7 @@ metadata:
 spec:
   className: best-effort-small
   # Friendly image name: noble-server-cloudimg-amd64
-  imageName: vmi-f0e634cb6faede95e
+  imageName: vmi-7ede6590ed22d49c5
   storageClass: vsan-default-storage-policy
   powerState: PoweredOn
   network:
