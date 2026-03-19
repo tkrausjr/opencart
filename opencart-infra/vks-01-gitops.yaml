@@ -14,7 +14,7 @@ spec:
   topology:
     class: builtin-generic-v3.6.0
     classNamespace: vmware-system-vks-public
-    version: v1.35.0---vmware.2-vkr.4
+    version: v1.34.2---vmware.2-vkr.2
     variables:
       - name: kubernetes
         value:
