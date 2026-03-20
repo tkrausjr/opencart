@@ -12,7 +12,7 @@ spec:
   resources:
     requests:
       storage: 8Gi
-  storageClassName: vsan-default-storage-policy
+  storageClassName: cluster-wld01-01a-storage-policy
 
 ---
 apiVersion: v1
@@ -83,10 +83,10 @@ spec:
                     app.kubernetes.io/name: opencart
                 topologyKey: kubernetes.io/hostname
               weight: 1
-k      containers:
+      containers:
         - env:
             - name: BITNAMI_DEBUG
-              value: 'true'
+              value: 'false'
             - name: ALLOW_EMPTY_PASSWORD
               value: to_string(yes)
             - name: APACHE_HTTP_PORT_NUMBER
@@ -119,7 +119,7 @@ k      containers:
                   name: open-cart-oc-password
             - name: OPENCART_EMAIL
               value: user@example.com
-          image: harbor.mbentley.net/docker.io/bitnamilegacy/opencart-archived:4.0.1-1-debian-11-r66
+          image: harbor-01a.site-a.vcf.lab/opencart/opencart:4.0.1-1-debian-11-r66
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 6
@@ -185,3 +185,4 @@ k      containers:
         - name: opencart-data
           persistentVolumeClaim:
             claimName: open-cart-pvc
+            
