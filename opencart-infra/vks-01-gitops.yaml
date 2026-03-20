@@ -34,7 +34,7 @@ spec:
       machineDeployments:
         - class: node-pool
           name: vks-01-gitops-np-s2ih
-          replicas: 1
+          replicas: 2
           metadata:
             annotations:
               run.tanzu.vmware.com/resolve-os-image: os-name=photon, content-library=cl-03a37b547e2e41e3e
