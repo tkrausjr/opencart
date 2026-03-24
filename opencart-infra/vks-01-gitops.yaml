@@ -1,4 +1,4 @@
-apiVersion: cluster.x-k8s.io/v1beta1
+apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
   name: vks-01-gitops
@@ -19,7 +19,7 @@ spec:
       - name: kubernetes
         value:
           certificateRotation:
-            enabled: true
+            enabled: false
             renewalDaysBeforeExpiry: 365
       - name: vmClass
         value: best-effort-small
@@ -38,9 +38,4 @@ spec:
           metadata:
             annotations:
               run.tanzu.vmware.com/resolve-os-image: os-name=photon, content-library=cl-03a37b547e2e41e3e
-          variables:
-            overrides:
-              - name: node
-                value:
-                  labels:
-                    provisioned-by: argocd
+

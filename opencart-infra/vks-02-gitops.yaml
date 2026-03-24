@@ -19,7 +19,7 @@ spec:
       - name: kubernetes
         value:
           certificateRotation:
-            enabled: true
+            enabled: false
             renewalDaysBeforeExpiry: 365
       - name: vmClass
         value: best-effort-small
