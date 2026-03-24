@@ -1,4 +1,4 @@
-apiVersion: cluster.x-k8s.io/v1beta1
+apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
   name: vks-01-gitops
@@ -12,8 +12,9 @@ spec:
         - 10.96.0.0/12
     serviceDomain: cluster.local
   topology:
-    class: builtin-generic-v3.6.0
-    classNamespace: vmware-system-vks-public
+    classRef:
+      name: builtin-generic-v3.6.0
+      namespace: vmware-system-vks-public
     version: v1.34.2---vmware.2-vkr.2
     variables:
       - name: kubernetes
@@ -33,9 +34,15 @@ spec:
     workers:
       machineDeployments:
         - class: node-pool
-          name: vks-01-gitops-np-s2ih
+          name: vks-01-gitops
           replicas: 2
           metadata:
             annotations:
               run.tanzu.vmware.com/resolve-os-image: os-name=photon, content-library=cl-03a37b547e2e41e3e
+          variables:
+            overrides:
+              - name: node
+                value:
+                  labels:
+                    provisioned-by: argocd
 

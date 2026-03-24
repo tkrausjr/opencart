@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1beta2
 kind: Cluster
 metadata:
-  name: vks-02-gitops
+  name: vks-02-gitops-cert-rotation-enabled
 spec:
   clusterNetwork:
     pods:
@@ -20,7 +20,7 @@ spec:
       - name: kubernetes
         value:
           certificateRotation:
-            enabled: false
+            enabled: true
             renewalDaysBeforeExpiry: 365
       - name: vmClass
         value: best-effort-small
@@ -34,7 +34,7 @@ spec:
     workers:
       machineDeployments:
         - class: node-pool
-          name: vks-02-gitops-np-s2ih
+          name: vks-02-gitops
           replicas: 1
           metadata:
             annotations:
