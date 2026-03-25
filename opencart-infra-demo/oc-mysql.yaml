@@ -7,13 +7,13 @@ metadata:
     vm-lb-selector: oc-mysql-demo
     topology.kubernetes.io/zone: z-wld-a
 spec:
-  className: best-effort-small
+  className: best-effort-xsmall
   # Friendly image name: noble-server-cloudimg-amd64
   imageName: vmi-7ede6590ed22d49c5
-  storageClass: vsan-default-storage-policy
+  storageClass: nfs-datastore-policy
   powerState: PoweredOn
   network:
-    hostName: oc-mysql
+    hostName: oc-mysql-demo
     domainName: vcf.lab
     nameservers:
       - 10.1.1.1
