@@ -25,7 +25,7 @@ spec:
       - name: vmClass
         value: best-effort-xsmall
       - name: storageClass
-        value: vsan-default-storage-policy
+        value: nfs-datastore-policy
     controlPlane:
       replicas: 1
       metadata:
