@@ -1,4 +1,4 @@
-apiVersion: vmoperator.vmware.com/v1alpha3
+apiVersion: vmoperator.vmware.com/v1alpha5
 kind: VirtualMachine
 metadata:
   name: oc-mysql-demo
@@ -9,8 +9,8 @@ metadata:
 spec:
   className: best-effort-xsmall
   # Friendly image name: noble-server-cloudimg-amd64
-  imageName: vmi-7ede6590ed22d49c5
-  storageClass: nfs-datastore-policy
+  imageName: vmi-39b6ab94df8ec9878
+  storageClass: vsan-default-storage-policy
   powerState: PoweredOn
   network:
     hostName: oc-mysql-demo
