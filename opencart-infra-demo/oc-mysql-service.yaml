@@ -6,6 +6,7 @@ spec:
   selector:
     vm-lb-selector: oc-mysql-demo
   type: LoadBalancer
+  loadBalancerIP: "10.1.9.99"
   ports:
     - name: ssh
       protocol: TCP
