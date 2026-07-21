@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   name: my-open-cart-lb
-  namespace: opencart
+  namespace: default
 spec:
   ports:
     - name: http

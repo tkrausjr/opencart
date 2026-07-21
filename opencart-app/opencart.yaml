@@ -5,7 +5,7 @@ metadata:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   name: open-cart-pvc
-  namespace: opencart
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
@@ -24,7 +24,7 @@ metadata:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   name: open-cart-oc-password
-  namespace: opencart
+  namespace: default
 type: Opaque
 
 
@@ -38,7 +38,7 @@ metadata:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   name: my-open-externaldb
-  namespace: opencart
+  namespace: default
 type: Opaque
 
 
@@ -51,7 +51,7 @@ metadata:
     app.kubernetes.io/instance: my-open-cart
     app.kubernetes.io/name: opencart
   name: my-open-cart-app
-  namespace: opencart
+  namespace: default
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
